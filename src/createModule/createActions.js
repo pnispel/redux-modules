@@ -25,8 +25,6 @@ const payloadPipeline = (...args) => {
 const metaPipeline = ({propTypes, ...args}) => {
   if (!propTypes) return;
 
-  console.log(propTypes);
-
   return payload => {
     propchecker({
       onError: onError('metaType'),
