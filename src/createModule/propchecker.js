@@ -2,10 +2,10 @@ import { curry, keys, forEach, compose } from 'ramda';
 
 const defaultPropCheck = () => { return {}; };
 
-export const propCheckedPayloadCreator = ({actionName, payloadTypes, onError}) =>
+export const propCheckedCreator = ({actionName, propTypes, onError}) =>
   payload => {
     const _propCheck = type => {
-      const propChecker = payloadTypes[type] || defaultPropCheck;
+      const propChecker = propTypes[type] || defaultPropCheck;
       const typeError = propChecker(payload, type, actionName, 'prop') || {};
       const { message } = typeError;
 
@@ -15,9 +15,7 @@ export const propCheckedPayloadCreator = ({actionName, payloadTypes, onError}) =
     compose(
       forEach(_propCheck),
       keys
-    )(payloadTypes);
-
-    return payload;
+    )(propTypes);
   }
 
-export default propCheckedPayloadCreator;
+export default propCheckedCreator;

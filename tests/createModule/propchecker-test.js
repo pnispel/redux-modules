@@ -2,7 +2,7 @@ import { PropTypes } from 'react';
 import { expect, should } from 'chai';
 require('mocha-sinon');
 import { Map } from 'immutable';
-import payloadPropchecker from '../../src/createModule/payloadPropchecker';
+import propchecker from '../../src/createModule/propchecker';
 should();
 
 const mockTransforms = [
@@ -26,12 +26,12 @@ const mockPayload = {
   label: 'Joe',
 };
 
-describe('payloadPropchecker', () => {
+describe('propchecker', () => {
   let warning = false;
 
-  const propCheckedPayloadCreator = payloadPropchecker({
+  const propCheckedPayloadCreator = propchecker({
     actionName: mockTransforms[0].formattedConstant,
-    payloadTypes: mockTransforms[0].payloadTypes,
+    propTypes: mockTransforms[0].payloadTypes,
     onError: err => {
       console.error(err);
       warning = err;
