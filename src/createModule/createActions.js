@@ -14,13 +14,15 @@ const _generateActions = (generatedActions, transformation) => {
   const {
     action,
     payloadTypes = {},
+    meta,
     formattedConstant: actionName,
   } = transformation;
   const camelizedActionName = camelize(action);
 
   generatedActions[camelizedActionName] = createAction(
     actionName,
-    payloadPropchecker({actionName, payloadTypes, onError})
+    payloadPropchecker({actionName, payloadTypes, onError}),
+    () => meta
   );
 
   return generatedActions;
